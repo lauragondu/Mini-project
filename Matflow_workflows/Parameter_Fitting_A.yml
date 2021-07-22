@@ -1,0 +1,144 @@
+name: damask_plastic_parameter_fitting
+
+stats: false
+run_options:
+  l: short
+archive: dropbox
+
+iterate:
+  parameter: single_crystal_parameters
+  num_iterations: 4
+
+tasks:
+  - name: generate_microstructure_seeds
+    method: random
+    software: damask
+    base:
+      grid_size: [120, 120, 120] 
+      num_grains: 1500 
+      size: [1, 1, 1] 
+    output_map_options:
+      phase_label: Al 
+      
+  - name: sample_texture
+    method: from_CRC_file
+    software: mtex
+    base:
+      CRC_file_path: /net/scratch2/j06992lg/Parameter_fitting_A/Data/AlloyA.crc
+      CPR_file_path: /net/scratch2/j06992lg/Parameter_fitting_A/Data/AlloyA.cpr
+      specimen_symmetry: orthorhombic
+      phase: Aluminium # Change to mtex phase
+      num_orientations: 1500
+    output_map_options:
+      orientation_coordinate_system:
+        x: RD
+        y: TD
+        z: ND
+        
+  - name: generate_volume_element
+    method: random_voronoi_from_orientations
+    software: damask
+    base:
+      homog_label: SX
+      scale_morphology: [1, 1, 1]
+      
+  - name: visualise_volume_element
+    method: VTK
+    software: damask
+
+  - name: generate_load_case
+    method: uniaxial
+    software: formable
+    base:
+      total_times:         [200]
+      num_increments:      [800]
+      target_strain_rates: [1.5e-3]
+      directions:          [x]
+
+  - name: get_tensile_test
+    method: from_CSV
+    software: formable
+    base:
+      CSV_file_path: /net/scratch2/j06992lg/Parameter_fitting_A/Data/Tensile_test_AlloyA.csv
+      CSV_arguments:
+        delimiter: ','
+        skip_rows: 1
+        header_row: 0
+      true_strain_col_index: 2
+      true_stress_col_index: 3
+      stress_units: MPa
+
+  - name: simulate_volume_element_loading
+    method: CP_FFT
+    software: DAMASK
+    run_options:
+      num_cores: 4
+      processing:
+        num_cores: 4
+    output_map_options:
+      operations:
+        - name: add_Cauchy
+          args: {P: P, F: F}
+          opts: {add_Mises: true}
+        - name: add_strain_tensor
+          args: {F: F, t: V, m: 0}
+          opts: {add_Mises: true}
+      incremental_data:
+        - name: vol_avg_equivalent_stress
+          path: constituent/1_Al/generic/sigma_vM
+          transforms: [mean_along_axes: 1]
+        - name: vol_avg_equivalent_strain
+          path: constituent/1_Al/generic/epsilon_V^0(F)_vM
+          transforms: [mean_along_axes: 1]
+    base:
+      single_crystal_parameters:
+        Al:
+          h_0_sl_sl: 425e6 #Hardening related 
+          xi_0_sl: [41e6] #YS related, initial slip resistance
+          xi_inf_sl: [231e6] #UTS related 
+          a_sl: 4.7  # Hardening exponent
+      homogenization_schemes:
+        SX:
+          mech:
+            type: none
+      phases:
+        Al:
+          elasticity:
+            type: hooke
+            C_11: 107.3e9
+            C_12: 60.9e9
+            C_44: 28.3e9
+          generic:
+            output: [F, P, Fp]
+          lattice: fcc
+          plasticity:
+            type: phenopowerlaw
+            single_crystal_parameters: Al
+            N_sl: [12]       # Number of slip systems to include 
+            atol_xi: 1.0
+            dot_gamma_0_sl: 0.001      # slip volume fraction      
+            h_sl_sl: [1, 1, 1.4, 1.4, 1.4, 1.4]
+            n_sl: 20
+            output: [xi_sl]            
+    sequences:
+      - name: single_crystal_parameter_perturbation
+        vals:
+          - perturbation: null
+          - address: [Al, h_0_sl_sl]
+            perturbation: 0.05
+          - address: [Al, xi_0_sl, 0]
+            perturbation: 0.05
+          - address: [Al, xi_inf_sl, 0]
+            perturbation: 0.05
+          - address: [Al, a_sl]
+            perturbation: 0.05
+    groups:
+      single_crystal_parameter_optimisation:
+        group_by: []
+        nest: True
+ 
+  - name: optimise_single_crystal_parameters
+    method: levenberg_marquardt
+    software: formable
+    base:
+      initial_damping: [2.0, 1.0, 0.5]
