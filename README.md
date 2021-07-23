@@ -3,6 +3,7 @@
 - [Aim of the project](#aim-of-the-project)
 - [Description of the project](#description-of-the-project)
 - [Folders](#folders)
+
     -[Jupyter_notebooks](#jupyter_notebooks)
     -[Matflow_workflows](#matflow_workflow)
 - [Prerequisites](#prerequisites)
@@ -53,7 +54,7 @@ It is necessary to install the following packages to run the code.
 1. Install the Python packages described in the prerequisites section of this README file.
 2. Download the code from:
    ```sh
-   git clone https://github.com/lauragondu/Mini-project.git
+   https://github.com/lauragondu/Mini-project.git
    ```
 3. Open the demo notebooks to see the results and the code used to obtain them.
 
