@@ -4,9 +4,9 @@
 - [Description of the project](#description-of-the-project)
 - [Folders](#folders)
 
-    -[Jupyter_notebooks](#jupyter_notebooks)
+    [Jupyter_notebooks](#jupyter_notebooks)
     
-    -[Matflow_workflows](#matflow_workflow)
+    [Matflow_workflows](#matflow_workflow)
 - [Prerequisites](#prerequisites)
 - [Usage](#usage)
 
