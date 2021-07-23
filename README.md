@@ -3,6 +3,8 @@
 - [Aim of the project](#aim-of-the-project)
 - [Description of the project](#description-of-the-project)
 - [Folders](#folders)
+    -[Jupyter_notebooks](#jupyter_notebooks)
+    -[Matflow_workflows](#matflow_workflow)
 - [Prerequisites](#prerequisites)
 - [Usage](#usage)
 
@@ -15,7 +17,7 @@ Premature failure can occur at the grain boundaries on the top surface of alumin
 
 ## Folders:
 
-- **Jupyter_notebook** --> This folder has the Jupyter notebooks used to plot the results in different types of graphs.
+- **Jupyter_notebooks** --> This folder has the Jupyter notebooks used to plot the results in different types of graphs.
 
 - **Matflow_workflows** -->  This folder has the .yml files used to run the simulations.
     
