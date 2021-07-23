@@ -5,10 +5,6 @@
 - [Folders](#folders)
 - [Prerequisites](#prerequisites)
 - [Usage](#usage)
-- [Functions](#functions)
-  - [image_count](#image_count)
-  - [Gaussian_thresholding](#Gaussian_thresholding)
-  - [image_clean_up](#image_clean_up)
 
 
 ## Aim of the project: 
