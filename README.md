@@ -1,3 +1,6 @@
 # Mini-project
 
-In this repository I save all the code of my mini-project
+
+Matflow_Workflow: 
+
+Parameter fitting - Uniaxial tension simulation - Plain strain tension simulation
