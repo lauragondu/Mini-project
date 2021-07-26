@@ -21,7 +21,7 @@ Premature failure can occur at the grain boundaries on the top surface of alumin
 
 - **Jupyter_notebooks** --> This folder has the Jupyter notebooks used to plot the results in different types of graphs.
 
-- **Matflow_workflows** -->  This folder has the .yml files used to run the simulations.
+- **Matflow_workflows** -->  This folder has the .yml files used to run the simulations for Alloy A.
     
          
 ## Prerequisites:
