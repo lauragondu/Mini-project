@@ -12,10 +12,10 @@
 
 
 ## Aim of the project: 
-Study the effect of texture on the stress and strain localisation duringaluminium sheets bending.
+Study the effect of texture on the stress and strain localisation during aluminium sheets bending.
 
 ## Description of the project:
-Premature failure can occur at the grain boundaries on the top surface of aluminium sheets duringbending. Materials with different textures have different bendability, but the origin of this correla-tion is not known. In this project, crystal plasticity modelling was used to study the relationshipbetween stress and strain localisation and texture in three alloys with different textures. The VonMises stresses, effective strain and triaxiality values were extracted from uniaxial and plane straintension simulations to a target strain of 15 %. As expected, damage indicators like triaxiality andstrain localisation were higher for the plane strain than for the uniaxial simulations. However,no clear relationship between texture and damage indicators could be found. In future work, thismodel will be improved to represent the grain shapes and grain boundary misorientations morefaithfully, so that more realistic predictions of stress and strain localisation can be made.
+Premature failure can occur at the grain boundaries on the top surface of aluminium sheets during bending. Materials with different textures have different bendability, but the origin of this correlation is not known. In this project, crystal plasticity modelling was used to study the relationship between stress and strain localisation and texture in three alloys with different textures. The Von Mises stresses, effective strain and triaxiality values were extracted from uniaxial and plane strain tension simulations to a target strain of 15 %. As expected, damage indicators like triaxiality and strain localisation were higher for the plane strain than for the uniaxial simulations. However, no clear relationship between texture and damage indicators could be found. In future work, this model will be improved to represent the grain shapes and grain boundary misorientations more faithfully, so that more realistic predictions of stress and strain localisation can be made.
 
 ## Folders:
 
